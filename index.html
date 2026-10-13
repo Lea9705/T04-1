@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>T04 – SVG House &amp; Garden</title>
+  <style>
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      color: #222;
+      background: #f6f8f4;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+      line-height: 1.55;
+    }
+    h1 { margin-bottom: 4px; }
+    h2 { margin-top: 40px; border-bottom: 1px solid #ccd5c6; padding-bottom: 4px; }
+    figure { margin: 16px 0; }
+    figcaption { font-style: italic; margin-top: 6px; color: #444; }
+
+    /* Light border around every SVG */
+    svg {
+      display: block;
+      width: 100%;
+      max-width: 800px;
+      height: auto;
+      border: 2px solid #3d4a3a;
+      border-radius: 6px;
+      background: #fff;
+    }
+
+    /* ---------- Step 2: styles scoped to the annotated copy only ---------- */
+    #scene-annotated #annotations {
+      font-size: 12px;
+      font-family: "Courier New", monospace;
+      fill: #333;
+      stroke: #999;
+      stroke-width: 1;
+      pointer-events: none;
+    }
+    /* White halo behind label text so it is readable over any colour */
+    #scene-annotated #annotations text {
+      paint-order: stroke;
+      stroke: #fff;
+      stroke-width: 3px;
+      stroke-linejoin: round;
+    }
+    /* Red dots mark the exact coordinate being labelled */
+    #scene-annotated #annotations .pt { fill: #d62828; stroke: none; }
+
+    /* ---------- Step 3: styles scoped to the adjusted copy only ---------- */
+    #scene-adjusted .fence { stroke-dasharray: 8 5; }          /* dashed fence */
+    #scene-adjusted .smoke { fill: #cfcfcf; opacity: 0.75; }   /* chimney smoke */
+
+    /* ---------- Step 4: styles scoped to the grouped copy only ---------- */
+    #scene-grouped #windows use { cursor: default; }
+  </style>
+</head>
+<body>
+
+  <h1>T04 – SVG House &amp; Garden</h1>
+  <p>COS30045 Exercise T04-1: drawing with SVG primitives, the SVG coordinate system, and the group element.</p>
+
+  <!-- =====================================================================
+       STEP 1 – Original scene using every basic SVG shape
+       ===================================================================== -->
+  <h2>Step 1: Original scene</h2>
+  <figure id="scene-original-figure">
+    <svg id="scene-original" viewBox="0 0 800 500" width="800" height="500"
+         xmlns="http://www.w3.org/2000/svg" role="img"
+         aria-labelledby="orig-title orig-desc">
+      <title id="orig-title">House and garden scene</title>
+      <desc id="orig-desc">A house with a red roof, chimney, door and two windows, a tree, a sun, a cloud, a white picket fence and a curved garden path.</desc>
+
+      <!-- Sky and grass (rect) -->
+      <rect x="0" y="0" width="800" height="320" fill="#bfe3ff"/>
+      <rect x="0" y="320" width="800" height="180" fill="#7cc860"/>
+
+      <!-- Sun (circle) -->
+      <circle cx="700" cy="80" r="45" fill="#ffd23f"/>
+
+      <!-- Cloud (ellipse) -->
+      <g fill="#ffffff">
+        <ellipse cx="180" cy="90" rx="60" ry="28"/>
+        <ellipse cx="225" cy="75" rx="45" ry="25"/>
+        <ellipse cx="140" cy="80" rx="40" ry="22"/>
+      </g>
+
+      <!-- Tree: trunk (rect) + canopy (circle) -->
+      <rect x="600" y="240" width="30" height="110" fill="#8b5a2b"/>
+      <circle cx="615" cy="210" r="60" fill="#2e8b3d"/>
+
+      <!-- Chimney (rect) drawn before the roof so the roof hides its base -->
+      <rect x="440" y="135" width="30" height="60" fill="#8a3b2a"/>
+
+      <!-- Roof (polygon) -->
+      <polygon points="240,220 380,120 520,220" fill="#b5432f"/>
+
+      <!-- House body (rect) -->
+      <rect x="260" y="220" width="240" height="150" fill="#f4d6a0"/>
+
+      <!-- Door (rect) + door knob (circle) -->
+      <rect x="360" y="290" width="40" height="80" fill="#6b3e26"/>
+      <circle cx="392" cy="332" r="3" fill="#f2c94c"/>
+
+      <!-- Window 1 (rect + mullion lines) -->
+      <rect x="290" y="250" width="35" height="30" fill="#cfefff" stroke="#333" stroke-width="2"/>
+      <line x1="307.5" y1="250" x2="307.5" y2="280" stroke="#333" stroke-width="2"/>
+      <line x1="290" y1="265" x2="325" y2="265" stroke="#333" stroke-width="2"/>
+
+      <!-- Window 2 (rect + mullion lines) -->
+      <rect x="435" y="250" width="35" height="30" fill="#cfefff" stroke="#333" stroke-width="2"/>
+      <line x1="452.5" y1="250" x2="452.5" y2="280" stroke="#333" stroke-width="2"/>
+      <line x1="435" y1="265" x2="470" y2="265" stroke="#333" stroke-width="2"/>
+
+      <!-- Curved garden path (path) -->
+      <path d="M 360 370 C 340 420, 300 450, 250 500 L 330 500 C 370 450, 395 420, 400 370 Z" fill="#d9c7a3"/>
+
+      <!-- Flowers (circle) -->
+      <g fill="#ff6b9a">
+        <circle cx="285" cy="382" r="5"/><circle cx="305" cy="388" r="5"/><circle cx="325" cy="382" r="5"/>
+      </g>
+      <g fill="#ffb703">
+        <circle cx="435" cy="382" r="5"/><circle cx="455" cy="388" r="5"/><circle cx="475" cy="382" r="5"/>
+      </g>
+
+      <!-- Picket fence (polyline) + rail (line) -->
+      <polyline points="20,380 20,350 30,340 40,350 40,380 60,380 60,350 70,340 80,350 80,380 100,380 100,350 110,340 120,350 120,380 140,380 140,350 150,340 160,350 160,380 180,380 180,350 190,340 200,350 200,380"
+                fill="none" stroke="#ffffff" stroke-width="3"/>
+      <line x1="10" y1="365" x2="210" y2="365" stroke="#ffffff" stroke-width="3"/>
+
+      <!-- Caption (text) -->
+      <text x="480" y="470" font-family="Arial, sans-serif" font-size="20" fill="#1f3d1f">T04 – My House &amp; Garden</text>
+    </svg>
+    <figcaption>Original scene</figcaption>
+  </figure>
+
+</body>
+</html>
