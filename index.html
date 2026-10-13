@@ -381,17 +381,5 @@
     <figcaption>Grouped windows scene (Step 4)</figcaption>
   </figure>
 
-  <!-- =====================================================================
-       STEP 5 – DOM inspection notes
-       ===================================================================== -->
-  <h2>Step 5: Viewing the DOM</h2>
-  <p>Open Developer Tools (F12), go to Elements, and expand each SVG:</p>
-  <ul>
-    <li><code>#scene-original</code>: every shape is its own element with its attributes visible (x, y, cx, cy, r, points, d).</li>
-    <li><code>#scene-annotated</code>: contains <code>&lt;g id="annotations"&gt;</code> holding the label <code>&lt;text&gt;</code> elements and callout <code>&lt;line&gt;</code>s.</li>
-    <li><code>#scene-adjusted</code>: the fence has <code>stroke-dasharray</code> (in Styles), and the house and tree sit inside <code>&lt;g transform="translate(…)"&gt;</code>.</li>
-    <li><code>#scene-grouped</code>: <code>&lt;g id="window"&gt;</code> inside <code>&lt;defs&gt;</code>, reused by two <code>&lt;use&gt;</code> elements with <code>transform="translate(…)"</code>.</li>
-  </ul>
-
 </body>
 </html>
