@@ -238,5 +238,87 @@
     <figcaption>Annotated scene (Step 2)</figcaption>
   </figure>
 
+  <!-- =====================================================================
+       STEP 3 – Customised copy
+       ===================================================================== -->
+  <h2>Step 3: Customised scene</h2>
+  <figure id="scene-adjusted-figure">
+    <svg id="scene-adjusted" viewBox="0 0 800 500" width="800" height="500"
+         xmlns="http://www.w3.org/2000/svg" role="img"
+         aria-labelledby="adj-title adj-desc">
+      <title id="adj-title">Customised house and garden scene</title>
+      <desc id="adj-desc">The scene with the house and tree repositioned, stronger colours and outlines, a dashed fence, a stone footpath, a mailbox and chimney smoke.</desc>
+
+      <!-- CHANGE: deeper sky and grass for better contrast -->
+      <rect x="0" y="0" width="800" height="320" fill="#9fd3f7"/>
+      <rect x="0" y="320" width="800" height="180" fill="#5fae43"/>
+
+      <!-- CHANGE: sun gets an orange outline -->
+      <circle cx="700" cy="80" r="45" fill="#ffd23f" stroke="#f4a100" stroke-width="4"/>
+
+      <g fill="#ffffff">
+        <ellipse cx="180" cy="90" rx="60" ry="28"/>
+        <ellipse cx="225" cy="75" rx="45" ry="25"/>
+        <ellipse cx="140" cy="80" rx="40" ry="22"/>
+      </g>
+
+      <!-- CHANGE: tree moved 30 units right with translate (no coordinate edits) -->
+      <g transform="translate(30,0)">
+        <rect x="600" y="240" width="30" height="110" fill="#7a4a22" stroke="#4d2e14" stroke-width="2"/>
+        <circle cx="615" cy="210" r="60" fill="#257a33" stroke="#17531f" stroke-width="3"/>
+      </g>
+
+      <!-- CHANGE: whole house moved 20 units left with translate -->
+      <g transform="translate(-20,0)">
+        <!-- NEW: chimney smoke (ellipses) rising from the chimney -->
+        <ellipse class="smoke" cx="455" cy="120" rx="12" ry="8"/>
+        <ellipse class="smoke" cx="465" cy="100" rx="16" ry="10"/>
+        <ellipse class="smoke" cx="480" cy="78" rx="20" ry="12"/>
+
+        <rect x="440" y="135" width="30" height="60" fill="#7a2f20" stroke="#4a1c12" stroke-width="2"/>
+        <!-- CHANGE: darker roof outline, thicker stroke -->
+        <polygon points="240,220 380,120 520,220" fill="#b5432f" stroke="#6e2418" stroke-width="4" stroke-linejoin="round"/>
+        <rect x="260" y="220" width="240" height="150" fill="#f4d6a0" stroke="#7a5530" stroke-width="3"/>
+        <rect x="360" y="290" width="40" height="80" fill="#4a2a17" stroke="#2b180c" stroke-width="2"/>
+        <circle cx="392" cy="332" r="3" fill="#f2c94c"/>
+
+        <!-- CHANGE: window outlines thicker -->
+        <rect x="290" y="250" width="35" height="30" fill="#cfefff" stroke="#333" stroke-width="3"/>
+        <line x1="307.5" y1="250" x2="307.5" y2="280" stroke="#333" stroke-width="2"/>
+        <line x1="290" y1="265" x2="325" y2="265" stroke="#333" stroke-width="2"/>
+        <rect x="435" y="250" width="35" height="30" fill="#cfefff" stroke="#333" stroke-width="3"/>
+        <line x1="452.5" y1="250" x2="452.5" y2="280" stroke="#333" stroke-width="2"/>
+        <line x1="435" y1="265" x2="470" y2="265" stroke="#333" stroke-width="2"/>
+
+        <path d="M 360 370 C 340 420, 300 450, 250 500 L 330 500 C 370 450, 395 420, 400 370 Z" fill="#d9c7a3"/>
+        <!-- NEW: curved stone footpath to the door — a thick dashed path reads as stepping stones -->
+        <path d="M 380 372 C 365 420, 330 455, 290 500" fill="none" stroke="#8d8d8d"
+              stroke-width="12" stroke-dasharray="14 10" stroke-linecap="round"/>
+
+        <g fill="#ff4f86">
+          <circle cx="285" cy="382" r="5"/><circle cx="305" cy="388" r="5"/><circle cx="325" cy="382" r="5"/>
+        </g>
+        <g fill="#ffb703">
+          <circle cx="435" cy="382" r="5"/><circle cx="455" cy="388" r="5"/><circle cx="475" cy="382" r="5"/>
+        </g>
+      </g>
+
+      <!-- CHANGE: fence is dashed (via scoped .fence class) and thicker -->
+      <polyline class="fence" points="20,380 20,350 30,340 40,350 40,380 60,380 60,350 70,340 80,350 80,380 100,380 100,350 110,340 120,350 120,380 140,380 140,350 150,340 160,350 160,380 180,380 180,350 190,340 200,350 200,380"
+                fill="none" stroke="#ffffff" stroke-width="4"/>
+      <line class="fence" x1="10" y1="365" x2="210" y2="365" stroke="#ffffff" stroke-width="4"/>
+
+      <!-- NEW: mailbox beside the path (post rect + box rect + rounded-top path + flag polygon) -->
+      <rect x="237" y="410" width="6" height="40" fill="#6b4a2b"/>
+      <rect x="222" y="392" width="36" height="20" fill="#2f5fa8" stroke="#1c3b6b" stroke-width="2"/>
+      <path d="M 222 394 A 18 10 0 0 1 258 394" fill="#2f5fa8" stroke="#1c3b6b" stroke-width="2"/>
+      <polygon points="258,390 270,394 258,398" fill="#e63946"/>
+
+      <!-- CHANGE: bolder, darker caption -->
+      <text x="480" y="470" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#123312">T04 – My House &amp; Garden</text>
+    </svg>
+    <figcaption>Adjusted scene (Step 3)</figcaption>
+  </figure>
+
 </body>
 </html>
