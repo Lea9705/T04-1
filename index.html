@@ -320,5 +320,78 @@
     <figcaption>Adjusted scene (Step 3)</figcaption>
   </figure>
 
+  <!-- =====================================================================
+       STEP 4 – Grouped windows reused with <use> and translate
+       ===================================================================== -->
+  <h2>Step 4: The group element</h2>
+  <figure id="scene-grouped-figure">
+    <svg id="scene-grouped" viewBox="0 0 800 500" width="800" height="500"
+         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+         role="img" aria-labelledby="grp-title grp-desc">
+      <title id="grp-title">House and garden scene with grouped windows</title>
+      <desc id="grp-desc">The original scene, but both windows are drawn from one reusable group positioned with translate.</desc>
+
+      <defs>
+        <!-- One window defined once, drawn at the origin (0,0).
+             Grouping means both windows share identical styling, and a change
+             here (e.g. a new fill colour) updates every window at once. -->
+        <g id="window">
+          <rect x="0" y="0" width="35" height="30" fill="#cfefff" stroke="#333" stroke-width="2"/>
+          <line x1="17.5" y1="0" x2="17.5" y2="30" stroke="#333" stroke-width="2"/>  <!-- vertical mullion -->
+          <line x1="0" y1="15" x2="35" y2="15" stroke="#333" stroke-width="2"/>      <!-- horizontal mullion -->
+        </g>
+      </defs>
+
+      <rect x="0" y="0" width="800" height="320" fill="#bfe3ff"/>
+      <rect x="0" y="320" width="800" height="180" fill="#7cc860"/>
+      <circle cx="700" cy="80" r="45" fill="#ffd23f"/>
+      <g fill="#ffffff">
+        <ellipse cx="180" cy="90" rx="60" ry="28"/>
+        <ellipse cx="225" cy="75" rx="45" ry="25"/>
+        <ellipse cx="140" cy="80" rx="40" ry="22"/>
+      </g>
+      <rect x="600" y="240" width="30" height="110" fill="#8b5a2b"/>
+      <circle cx="615" cy="210" r="60" fill="#2e8b3d"/>
+      <rect x="440" y="135" width="30" height="60" fill="#8a3b2a"/>
+      <polygon points="240,220 380,120 520,220" fill="#b5432f"/>
+      <rect x="260" y="220" width="240" height="150" fill="#f4d6a0"/>
+      <rect x="360" y="290" width="40" height="80" fill="#6b3e26"/>
+      <circle cx="392" cy="332" r="3" fill="#f2c94c"/>
+
+      <!-- Both windows in one group. translate(x,y) moves the window's (0,0)
+           origin to the window's original top-left corner:
+           left window  → (290,250), right window → (435,250). -->
+      <g id="windows">
+        <use href="#window" xlink:href="#window" transform="translate(290,250)"/>
+        <use href="#window" xlink:href="#window" transform="translate(435,250)"/>
+      </g>
+
+      <path d="M 360 370 C 340 420, 300 450, 250 500 L 330 500 C 370 450, 395 420, 400 370 Z" fill="#d9c7a3"/>
+      <g fill="#ff6b9a">
+        <circle cx="285" cy="382" r="5"/><circle cx="305" cy="388" r="5"/><circle cx="325" cy="382" r="5"/>
+      </g>
+      <g fill="#ffb703">
+        <circle cx="435" cy="382" r="5"/><circle cx="455" cy="388" r="5"/><circle cx="475" cy="382" r="5"/>
+      </g>
+      <polyline points="20,380 20,350 30,340 40,350 40,380 60,380 60,350 70,340 80,350 80,380 100,380 100,350 110,340 120,350 120,380 140,380 140,350 150,340 160,350 160,380 180,380 180,350 190,340 200,350 200,380"
+                fill="none" stroke="#ffffff" stroke-width="3"/>
+      <line x1="10" y1="365" x2="210" y2="365" stroke="#ffffff" stroke-width="3"/>
+      <text x="480" y="470" font-family="Arial, sans-serif" font-size="20" fill="#1f3d1f">T04 – My House &amp; Garden</text>
+    </svg>
+    <figcaption>Grouped windows scene (Step 4)</figcaption>
+  </figure>
+
+  <!-- =====================================================================
+       STEP 5 – DOM inspection notes
+       ===================================================================== -->
+  <h2>Step 5: Viewing the DOM</h2>
+  <p>Open Developer Tools (F12), go to Elements, and expand each SVG:</p>
+  <ul>
+    <li><code>#scene-original</code>: every shape is its own element with its attributes visible (x, y, cx, cy, r, points, d).</li>
+    <li><code>#scene-annotated</code>: contains <code>&lt;g id="annotations"&gt;</code> holding the label <code>&lt;text&gt;</code> elements and callout <code>&lt;line&gt;</code>s.</li>
+    <li><code>#scene-adjusted</code>: the fence has <code>stroke-dasharray</code> (in Styles), and the house and tree sit inside <code>&lt;g transform="translate(…)"&gt;</code>.</li>
+    <li><code>#scene-grouped</code>: <code>&lt;g id="window"&gt;</code> inside <code>&lt;defs&gt;</code>, reused by two <code>&lt;use&gt;</code> elements with <code>transform="translate(…)"</code>.</li>
+  </ul>
+
 </body>
 </html>
